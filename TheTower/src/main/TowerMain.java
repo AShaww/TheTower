@@ -4,7 +4,7 @@ import PlayerSingleton.PlayerSingleton;
 import Guns.Weapon;
 import java.util.*;
 
-public class FireingRange {
+public class TowerMain {
 
     Weapon weapon;
 
@@ -21,11 +21,13 @@ public class FireingRange {
         System.out.println(" - Upon entering you see a chest, intrigued you walk over and peer in - ");
         System.out.println(" ------- inside you see some weapons, deciding on which to pick ------- ");
         System.out.println();
-        System.out.println(" ----------------- Enter a number to select a weapon ------------------- ");
+        System.out.println("########################################################################");
+        System.out.println(" ----------------- Type a letter to select a weapon ------------------- ");
         System.out.println();
         System.out.println(" --- Enter 'S' for Shotgun");
         System.out.println(" --- Enter 'R' for Rifle");
         System.out.println(" --- Enter 'M' for MP5");
+        System.out.println("########################################################################");
         String chooseWeapon = scanner.next().toUpperCase();
 
         while (!chooseWeapon.equals("M") && !chooseWeapon.equals("R") && !chooseWeapon.equals("S")) {
@@ -40,46 +42,48 @@ public class FireingRange {
         System.out.println(" -------- Beside the weapon chest, you see two health potions --------- ");
         System.out.println(" --------- You see a note when picking up the health potions ---------- ");
         System.out.println(" -----------------------------------------------------------------------");
-        System.out.println(" --- You have entered the tower, you are expected to survive through- ---");
-        System.out.println(" --- do not question it, you are meant to be here. It is your destiny ---");
-        System.out.println();
+        System.out.println(" - \" You have entered the tower, you are expected to survive through- -");
+        System.out.println(" -- do not question it, you are meant to be here. It is your destiny --");
         System.out.println(" -- Do not faulter, make your way through the tower and find the Grail --");
         System.out.println(" --- I have left the health potions here, for you to use in times of- ---");
         System.out.println(" - emergency, use them when you are losing in battle, regenerate your- -");
         System.out.println(" ------------------ vitality, and destroy your enemy ------------------- ");
         System.out.println(" --------------- Find the grail and stop this madness. ----------------- ");
-        System.out.println(" ---------------------------- Signed - .RS ------------------------------");
+        System.out.println(" ---------------------------- Signed - .RS\" -----------------------------");
         System.out.println(" ------------------------------------------------------------------------");
         System.out.println(" ------ Upon reading the note, you hear a mechanism start to move ------ ");
         System.out.println(" ----------------- You put the note in your back pocket -----------------");
         System.out.println();
         System.out.println(" ---- Tracking the sound, you find a door that was not there before ----");
         System.out.println(" -------- Deciding if you are ready to approach the door... --------");
-
+        System.out.println(" ###################################################################### ");
         System.out.println(" --- Are you ready? --- ");
         System.out.println(" .1 'yes'");
         System.out.println(" .2 'no'");
+        System.out.println(" ###################################################################### ");
         int ready = scanner.nextInt();
-
+        System.out.println(" ------------------------------------------------------------------------ ");
         while (ready != 1) {
+            System.out.println(" ###################################################################### ");
             System.out.println(" Invalid Input");
-            System.out.println(" You have no where to go. The door behind you is locked... ");
-            System.out.println(" Are you ready?");
-            System.out.println(" '1' yes?");
+            System.out.println("\t You have no where to go. The door behind you is locked... ");
+            System.out.println("\t Are you ready?");
+            System.out.println("\t '1' yes?");
+            System.out.println(" ###################################################################### ");
             ready = scanner.nextInt();
         }
-
-        System.out.println(" ----- you reach for the door, and push hard... It swings open, you enter -----");
-        System.out.println(" -- A strong gust of wind closes the door behind you, hearing the mechanism- --");
-        System.out.println(" ----------------- You know that the door has locked itself -------------------");
-        System.out.println(" ------------------------------------------------------------------------------");
-
+        System.out.println(" ------------------------------------------------------------------------------ ");
+        System.out.println(" ----- you reach for the door, and push hard... It swings open, you enter ----- ");
+        System.out.println(" -- A strong gust of wind closes the door behind you, hearing the mechanism- -- ");
+        System.out.println(" ----------------- You know that the door has locked itself ------------------- ");
+        System.out.println(" ------------------------------------------------------------------------------ ");
+        System.out.println(" ################################################################################### ");
         PlayerSingleton player = PlayerSingleton.getInstance(chooseWeapon, name);
         player.chosenWeapon();
 
-        String[] enemies = {"Slime", "Small Demon", "Skeleton", "Baby Eastwood", "Giant Snake", "Behemoth"};
+        String[] enemies = {"Slime", "Small Demon", "Skeleton", "Baby Dragon", "Giant Snake", "Behemoth"};
 
-        int MAX_ENEMY_HEALTH = 20;
+        int MAX_ENEMY_HEALTH = 100;
         int MAX_ENEMY_ATTACK = 50;
         int enemyHP = MAX_ENEMY_HEALTH;
         int enemyDamage = MAX_ENEMY_ATTACK;
@@ -96,10 +100,10 @@ public class FireingRange {
         int randStep = rand.nextInt(grailStep);
 
         int halfStep = randStep / 2;
-        int thirdStep = randStep / 3;
 
         int playerHP = player.getHealth();
-  
+        int copyPlayerHP = playerHP;
+
         int basicAttachmentDropChance = 40;
         int goodAttachmentDropChance = 25;
 
@@ -107,6 +111,7 @@ public class FireingRange {
 
         GAME:
         while (isRunning) {
+
             int enemyHealth = rand.nextInt(enemyHP);
 
             if (enemyHealth == 0) {
@@ -117,7 +122,9 @@ public class FireingRange {
 
             OUTER:
             while (enemyHealth > 0) {
-                System.out.println("\tYour HP:" + playerHP);
+                int playerLives = player.getLives();    // has to be inside loop to update value
+                System.out.println("\tYour HP: " + playerHP);
+                System.out.println("\tYour lives: " + playerLives);
                 System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
                 System.out.println("\tWhat would you like to do?");
                 System.out.println("\t'1' Attack");
@@ -132,24 +139,15 @@ public class FireingRange {
                         if (damageDealt == 0) {
                             System.out.println("\tYou missed!");
                         } else {
-                            System.out.println("\tHit " + enemy + " " + "Attacked for " + damageDealt);
+                            System.out.println("\tYou hit " + enemy + " for " + damageDealt + " damage!");
                             playerHP -= damageTaken;
                         }
                         enemyHealth -= damageDealt;
                         player.sufferDamage(damageTaken);
-                        if (playerHP == 0) {
-                            System.out.println("\t You Died");
+                        if (playerHP <= 0) {
+                            System.out.println("\tYou Died");
+                            playerHP = copyPlayerHP;
                             player.respawn();
-                            if (playerHP == 0 && player.getLives() == 0) {
-                                System.out.println("You have died, all progress is lost...");
-                                System.out.println("Play again?");
-                                System.out.println(" '1' Play again");
-                                System.out.println(" '2' Exit");
-                                int dead = scanner.nextInt();
-                                if (dead == 1) {
-                                    System.out.println("Starting again. From tower enterance. ");
-                                }
-                            }
                             continue GAME;
                         }
                         break;
@@ -174,7 +172,7 @@ public class FireingRange {
 
             }
             randStep--;
-            System.out.println("RandStep = " + randStep);
+            System.out.println("Steps to to Grail " + randStep);
             if (randStep == halfStep) {
                 System.out.println("\t#############################################################################");
                 System.out.println("\t####            You are halway through the tower - keep going!           #### ");
@@ -220,7 +218,7 @@ public class FireingRange {
                 System.out.println("\t- Opening your eyes you realise that now you are in a room, within a bed. Like a dream that you remember -");
                 System.out.println("\t- Not knowing how you got there, but remembering what you did. You hope you can visit the dreamscape again the next time you- -");
                 System.out.println("\t close your eyes to sleep. ");
-                System.out.println("\t############################################################################################################################");       
+                System.out.println("\t############################################################################################################################");
                 break;
             }
         }

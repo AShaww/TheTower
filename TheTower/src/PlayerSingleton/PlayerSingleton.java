@@ -10,8 +10,8 @@ public final class PlayerSingleton {
     private Weapon weapon;
 
     private final String playerName;
-    public static Integer MAX_PLAYER_HEALTH = 20;
-    public static Integer DEFAULT_PLAYER_LIVES = 2;
+    public static Integer MAX_PLAYER_HEALTH = 200;
+    public static Integer DEFAULT_PLAYER_LIVES = 3;
 
     private Integer health = MAX_PLAYER_HEALTH;
     private int lives = DEFAULT_PLAYER_LIVES;
@@ -76,24 +76,26 @@ public final class PlayerSingleton {
     }
 
     public void chosenWeapon() {
-        System.out.println("Player Info: " + playerName + " " + "has: " + player.getHealth() + " health and "
+        System.out.println(" Player Info: " + playerName + " " + "has: " + player.getHealth() + " health and "
                 + lives + " lives" + " : " + weapon.getDescription() + ":" + " base damage: " + weapon.damage());
+        System.out.println(" ################################################################################### ");
         System.out.println();
+
     }
 
     public static Weapon chooseWeapon(String choice) {
         switch (choice) {
             case "M":
-                System.out.println("\tYou have chosen MP5!");
+                System.out.println(" You have chosen MP5!");
                 return new MP5Weapon();
             case "R":
-                System.out.println("\tYou have chosen Rifle!");
+                System.out.println(" You have chosen Rifle!");
                 return new RifleWeapon();
             case "S":
-                System.out.println("\tYou have chosen Shotgun!");
+                System.out.println(" You have chosen Shotgun!");
                 return new ShotgunWeapon();
             default:
-                System.out.println("\tNo gun by that name found!");
+                System.out.println(" No gun by that name found!");
                 return null;
         }
     }

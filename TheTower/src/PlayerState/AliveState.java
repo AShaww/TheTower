@@ -20,7 +20,7 @@ public class AliveState implements PlayerState {
 
         if (player.getHealth() <= 0) {
             player.setLives(player.getLives() - 1);
-        
+           
             player.setState(new DeadState(player));
         }
     }
