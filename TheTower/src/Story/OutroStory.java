@@ -1,6 +1,6 @@
 package Story;
 
-public class Outro implements TellStory {
+public class OutroStory implements TellStory {
 
     @Override
     public void tellStory() {
@@ -18,6 +18,6 @@ public class Outro implements TellStory {
         System.out.println("\t- Not knowing how you got there, but remembering what you did. You hope you can visit the dreamscape again the next time you- -");
         System.out.println("\t close your eyes to sleep. ");
         System.out.println("\t############################################################################################################################");
+    
     }
-
 }

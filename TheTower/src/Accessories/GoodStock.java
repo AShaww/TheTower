@@ -38,7 +38,7 @@ public class GoodStock extends AccessoriesDec {
 
     /**
      *
-     * @return
+     * @return accessory damage
      */
     @Override
     public int damage() {

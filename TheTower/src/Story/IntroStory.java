@@ -1,6 +1,6 @@
 package Story;
 
-public class Intro implements TellStory {
+public class IntroStory implements TellStory {
 
     @Override
     public void tellStory() {

@@ -1,10 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package PlayerState;
 
+/**
+ * Interface for state pattern, having alive and dead state implement from this interface.
+ * @author AmirS
+ */
 public interface PlayerState {
   void respawn();
   void takeDamage(int damage);

@@ -9,7 +9,7 @@ package Story;
  *
  * @author AmirS
  */
-public class Note implements TellStory {
+public class NoteStory implements TellStory {
 
     @Override
     public void tellStory() {

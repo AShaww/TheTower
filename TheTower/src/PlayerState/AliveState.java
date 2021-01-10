@@ -28,19 +28,16 @@ public class AliveState implements PlayerState {
      * @param playerDamage
      */
     @Override
-    public void takeDamage(int playerDamage) {
-        System.out.println(String.format("\tEnemy hit you for %d damage!", playerDamage));
-        player.setHealth(player.getHealth() - playerDamage);
-
-        if (player.getHealth() <= 0) {
-            player.setLives(player.getLives() - 1);
-           
-            player.setState(new DeadState(player));
+    public void takeDamage(int enemyDamage) {  
+        player.setHealth(player.getHealth() - enemyDamage);    //sets health based on getHealth minus enemyDamage.
+        
+        if (player.getHealth() <= 0) {    
+            player.setState(new DeadState(player)); //if playerHealth is below 0 or 0 then setState(new DeadState) which checks lives and health.
         }
     }
 
     /**
-     *
+     * Player is still in Alive State, Player is alive.
      */
     @Override
     public void respawn() {   

@@ -7,7 +7,7 @@ package Guns;
 public class MP5Weapon extends Weapon {
 
     /**
-     *  concrete String for weapon
+     *  concrete String for MP5Weapon
      */
     public MP5Weapon() {
         description = " Weapon: MP5 has";

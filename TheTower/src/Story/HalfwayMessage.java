@@ -16,5 +16,6 @@ public class HalfwayMessage implements TellStory {
         System.out.println("\t#############################################################################");
         System.out.println("\t####            You are halway through the tower - keep going!           ####");
         System.out.println("\t#############################################################################");
+       
     }
 }

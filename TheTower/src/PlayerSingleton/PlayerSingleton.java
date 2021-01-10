@@ -80,7 +80,7 @@ public final class PlayerSingleton{
     }
 
     /**
-     * 
+     * Checks playerState respawn method for current lives. 
      */
     public void respawn() {
         playerState.respawn();
@@ -127,7 +127,7 @@ public final class PlayerSingleton{
     }
 
     /**
-     *  @return weapon description and weapon damage
+     *  
      */
     public void chosenWeapon() {
         System.out.println(weapon.getDescription() + ": base damage: " + weapon.damage());
