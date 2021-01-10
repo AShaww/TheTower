@@ -4,15 +4,29 @@ import PlayerSingleton.PlayerSingleton;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ * 
+ * 
+ * @author AmirS
+ */
 public class AliveState implements PlayerState {
 
     private final PlayerSingleton player;
 
+    /**
+     *
+     * @param player
+     */
     public AliveState(PlayerSingleton player) {
         this.player = player;
-        this.player.setHealth(PlayerSingleton.MAX_PLAYER_HEALTH);
+        this.player.setHealth(player.getHealth());
     }
 
+    /**
+     *  
+     * @param playerDamage
+     */
     @Override
     public void takeDamage(int playerDamage) {
         System.out.println(String.format("\tEnemy hit you for %d damage!", playerDamage));
@@ -25,6 +39,9 @@ public class AliveState implements PlayerState {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void respawn() {   
         System.out.println("\tNothing to do, player is alive!");
