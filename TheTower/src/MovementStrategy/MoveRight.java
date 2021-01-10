@@ -1,4 +1,4 @@
-package Strategy;
+package MovementStrategy;
 
 public class MoveRight implements MovementStrategy {
 

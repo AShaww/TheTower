@@ -1,16 +1,31 @@
 package Guns;
 
+/**
+ * MP5Weapon class extending Weapon
+ * @author AmirS
+ */
 public class MP5Weapon extends Weapon {
 
+    /**
+     *  concrete String for weapon
+     */
     public MP5Weapon() {
-        description = "Chosen weapon is MP5";
+        description = " Weapon: MP5 has";
     }
 
+    /**
+     *
+     * @return weapon weight
+     */
     @Override
     public double weight() {
         return 12;
     }
 
+    /**
+     *
+     * @return weapon damage
+     */
     @Override
     public int damage() {
         return 13;
