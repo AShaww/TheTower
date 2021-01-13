@@ -2,14 +2,14 @@ package main;
 
 import PlayerSingleton.PlayerSingleton;
 import Guns.Weapon;
-import MovementStrategy.*;
+//import MovementStrategy.*; Unused, just as a tester for future implementation
 import java.util.*;
 import Enemy.Enemies;
 import Story.*;
 
 /**
  *
- * @author AmirS Weeeeeee
+ * @author AmirS
  */
 public class TowerMain {
 
@@ -29,20 +29,19 @@ public class TowerMain {
         TellStory out = new OutroStory();
         TellStory secondDoor = new ReachForSecondDoor();
 
-        MovementStrategy forward = new MoveForward();
-        MovementStrategy left = new MoveLeft();
-        MovementStrategy back = new MoveBackward();
-        MovementStrategy right = new MoveRight();
-        forward.doMovement();
-        left.doMovement();
-        back.doMovement();
-        right.doMovement();
-        System.out.println(forward.doMovement());
-        System.out.println(left.doMovement());
-        System.out.println(back.doMovement());
-        System.out.println(right.doMovement());
+//        MovementStrategy forward = new MoveForward();
+//        MovementStrategy left = new MoveLeft();
+//        MovementStrategy back = new MoveBackward();
+//        MovementStrategy right = new MoveRight();
+//        forward.doMovement();
+//        left.doMovement();
+//        back.doMovement();
+//        right.doMovement();
+//        System.out.println(forward.doMovement());
+//        System.out.println(left.doMovement());
+//        System.out.println(back.doMovement());
+//        System.out.println(right.doMovement());
 // Above implements a basic level of MovementStrategy, this can be implemented at a later date with different rooms etc.
-
         Random rand = new Random();
         Scanner scanner = new Scanner(System.in);
         System.out.println(" --------------------- What is your name Soldier? --------------------");
@@ -67,9 +66,9 @@ public class TowerMain {
         while (ready != 1) {
             System.out.println(" ######################################### ");      //Return message for Note
             System.out.println(" Invalid Input");
-            System.out.println("\t You have no where to go. The door behind you is locked... ");
-            System.out.println("\t Are you ready?");
-            System.out.println("\t '1' yes?");
+            System.out.println(" You have no where to go. The door behind you is locked... ");
+            System.out.println(" Are you ready?");
+            System.out.println(" '1' yes?");
             System.out.println(" ######################################### ");
             ready = scanner.nextInt();
         }
@@ -113,7 +112,7 @@ public class TowerMain {
 
             int enemyHealth = rand.nextInt(eHealth);
             int randEDamage = rand.nextInt(eDamage);    //randomises damage based on enemy damage
-            
+
             if (enemyHealth == 0) {         //Has to be == otherwise bound.Exception 
                 enemyHealth = rand.nextInt(eHealth);    // resets enemy health based on emepy health
             }
@@ -124,12 +123,12 @@ public class TowerMain {
             OUTER:
             while (enemyHealth > 0) {
                 int playerLives = player.getLives();    // has to be inside loop to update value
-                System.out.println("\tYour HP: " + playerHP);
-                System.out.println("\tYour lives: " + playerLives);
-                System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
-                System.out.println("\tWhat would you like to do?");
-                System.out.println("\t'1' Attack");
-                System.out.println("\t'2' Use health potion");
+                System.out.println("\t Your HP: " + playerHP);
+                System.out.println("\t Your lives: " + playerLives);
+                System.out.println("\t "+ enemy + "'s HP: " + enemyHealth);
+                System.out.println("\t What would you like to do?");
+                System.out.println("\t '1' Attack");
+                System.out.println("\t '2' Use health potion");
                 System.out.println();
                 String input = in.nextLine();
 
@@ -213,7 +212,20 @@ public class TowerMain {
             }
             if (randStep == 0) {
                 out.tellStory();
-                break;
+                System.out.println("You have finished the game");   //added while loop to help reader read the outro end story on the console.
+                System.out.println("Close console? ");  //adding this does not immediately close the console while running game using batch.
+                System.out.println(" '1' Yes");
+                int answer = scanner.nextInt();
+                while (answer != 1) {
+                    System.out.println("Close console? ");
+                    System.out.println(" 1. Yes");
+                    answer = scanner.nextInt();
+                    if (answer == 1) {
+                        System.exit(0);
+                        break;  //to ensure that the game stops after 1 has been entered.
+                    }
+                }
+                break;  //adding break stops game from rerunning
             }
         }
     }

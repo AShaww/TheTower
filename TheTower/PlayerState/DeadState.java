@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class DeadState implements PlayerState {
 
     private final PlayerSingleton player;
+    Scanner scanner = new Scanner(System.in);
 
     /**
      *
@@ -23,12 +24,24 @@ public class DeadState implements PlayerState {
      *
      * @param damage
      */
-    @Override 
+    @Override
     public void takeDamage(int damage) {
         int playerLives = player.getLives();
-        if (playerLives == 0) {   // if lives == 0
+        if (playerLives == 0) {  //added while loop to help reader read the you died Window. Instead of theh console closing instantly.
             System.out.println("\tYou have no lives left!");
-            System.out.println("\tBlacked out!");
+            System.out.println("\tBlacked out!" + " You have Died");
+            System.out.println("Close console? ");  //adding this does not immediately close the console while running game using batch.
+            System.out.println(" '1' Yes");
+            int answer = scanner.nextInt();
+            while (answer != 1) {
+                System.out.println("Close console? ");
+                System.out.println(" 1. Yes");
+                answer = scanner.nextInt();
+                if (answer == 1) {
+                    System.exit(0);
+                    break;  //to ensure that the game stops after 1 has been entered.
+                }
+            }
             System.exit(0);     //player dies = stop game.
         }
     }
