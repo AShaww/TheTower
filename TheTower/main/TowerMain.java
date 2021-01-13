@@ -41,7 +41,8 @@ public class TowerMain {
 //        System.out.println(left.doMovement());
 //        System.out.println(back.doMovement());
 //        System.out.println(right.doMovement());
-//        #
+// Above implements a basic level of MovementStrategy, this can be implemented at a later date with different rooms etc.
+
         Random rand = new Random();
         Scanner scanner = new Scanner(System.in);
         System.out.println(" --------------------- What is your name Soldier? --------------------");
@@ -89,32 +90,32 @@ public class TowerMain {
 
         int grailStep = 20;     // Grail steps
         int randStep = rand.nextInt(grailStep); // Randomise grail step
-        if (randStep <= 5) {    // If randStep is less than 5 randomise and add 2
+        if (randStep <= 8) {    // If randStep is less than 5 randomise and add 2
             randStep = rand.nextInt(grailStep + 2);
         }
         int halfStep = randStep / 2;
 
         int playerHP = player.getHealth();
-        int resetPlayerHP = playerHP;
+        int resetPlayerHP = playerHP;       //sets the resetPlayerHP to playerHP outside of the scope of the game. This is used to reset the health on every loop of player dead.
 
-        int eHealth = enemys.getEnemyHP();
-        int eDamage = enemys.getEnemyDamage();
-        int randEDamage = rand.nextInt(eDamage);
+        int eHealth = enemys.getEnemyHP();  //gets the enemyHP 
+        int eDamage = enemys.getEnemyDamage();  // gets Enemy damage
+        int randEDamage = rand.nextInt(eDamage);    //randomises damage based on enemy damage
 
-        int basicAttachmentDropChance = 40;
-        int goodAttachmentDropChance = 25;
+        int basicAttachmentDropChance = 40; //sets int to use as random 
+        int goodAttachmentDropChance = 25; //sets int to use as random 
 
         boolean isRunning = true;
 
         GAME:       //Loop checkpoint, to return when player dies.
         while (isRunning) {
-            System.out.println(" # Steps to to Grail " + randStep + " #");
+            System.out.println(" # Steps to to Grail " + randStep + " #");  //prints out step count remaining in the game
             System.out.println(" ####################### ");
             
             int enemyHealth = rand.nextInt(eHealth);
 
-            if (enemyHealth == 0) {         //Has to be == otherwise bound.Exception
-                enemyHealth = rand.nextInt(eHealth);
+            if (enemyHealth == 0) {         //Has to be == otherwise bound.Exception 
+                enemyHealth = rand.nextInt(eHealth);    // resets enemy health based on emepy health
             }
             String randomEnemy = enemys.randomEnemy();
             String enemy = randomEnemy;
@@ -147,19 +148,19 @@ public class TowerMain {
                         player.sufferDamage(damageTaken);
                         if (playerHP <= 0) {
                             System.out.println("\tYou Died");
-                            playerHP = resetPlayerHP;
-                            player.respawn();
+                            playerHP = resetPlayerHP;   //sets playerHP to copy of playerHP
+                            player.respawn();   //respawn called from player class
                             continue GAME;  //Starts loop again from GAME:
                         }
                         break;
                     case "2":
                         if (numOfHealthPot > 0) {
-                            playerHP += healthPotHealAmount;
+                            playerHP += healthPotHealAmount;    //adds amout of healing from potion on playerHP
                             numOfHealthPot--;
                             System.out.println(" You drink a health potion, healing you for " + healthPotHealAmount);
                             System.out.println();
-                            System.out.println("\tYou now have " + playerHP + " HP");
-                            System.out.println("\tYou have " + numOfHealthPot + " left");
+                            System.out.println("\tYou now have " + playerHP + " HP");   //prints out PlayerHP
+                            System.out.println("\tYou have " + numOfHealthPot + " left");   //prints out number of health potions remaining
                         } else {
                             System.out.println("\t No more health potions! Defeat an enemy to have a chance of getting another one...");
                         }
@@ -183,7 +184,7 @@ public class TowerMain {
             }
             
             System.out.println("--------------------------------------");
-            System.out.println("# " + enemy + " was defeated! #");
+            System.out.println("# " + enemy + " was defeated! #"); 
             System.out.println("# You have " + playerHP + " HP left. #");
             System.out.println("--------------------------------------");
 
@@ -192,15 +193,16 @@ public class TowerMain {
                 System.out.println(" ################################################### ");
                 System.out.println(" # The " + enemy + " dropped a health potion!  ");
                 System.out.println(" # You now have " + numOfHealthPot + " health potion. ");
-
-                if (rand.nextInt(100) < basicAttachmentDropChance) {
+//int basicAttachmentDropChance = 40;
+//        int goodAttachmentDropChance = 25;
+                if (rand.nextInt(100) < basicAttachmentDropChance) {    //randomises if return on rand is less than the chance of obtaining basic attachment (40)
                     String[] attachments = {"Sight", "Silencer", "Stock"};
                     String chooseAttachment = attachments[rand.nextInt(attachments.length)];
                     System.out.println(" # Gained a random Basic attachment: " + chooseAttachment);
                     player.addBasicAttachment(chooseAttachment);
                     player.chosenWeapon();
                 }
-                if (rand.nextInt(100) < goodAttachmentDropChance) {
+                if (rand.nextInt(100) < goodAttachmentDropChance) {//randomises if return on rand is less than the chance of obtaining good attachment (25)
                     String[] attachments = {"Sight", "Silencer", "Stock"};
                     String chooseAttachment = attachments[rand.nextInt(attachments.length)];
                     System.out.println(" # Gained a random Good attachment: " + chooseAttachment);
