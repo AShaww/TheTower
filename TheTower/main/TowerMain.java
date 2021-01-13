@@ -19,28 +19,28 @@ public class TowerMain {
     public static void main(String[] args) {
 
         Enemies enemys = new Enemies();
-        
+
 //      My working version of adding an enemy to List Object
 //      enemys.addEnemy("**Test Enemy**");  //Testing method of adding enemy to list in Enemies class
 //      Outputs: [Slime, Small Demon, Skeleton, Baby Dragon, Giant Snake, Behemoth, **Test Enemy**]  
-
         TellStory intro = new IntroStory();
         TellStory note = new NoteStory();
         TellStory halfway = new HalfwayMessage();
         TellStory out = new OutroStory();
         TellStory secondDoor = new ReachForSecondDoor();
 
-//        MovementStrategy forward = new MoveForward();
-//        MovementStrategy left = new MoveLeft();
-//        MovementStrategy back = new MoveBackward();
-//        forward.doMovement();
-//        left.doMovement();
-//        back.doMovement();
-//        right.doMovement();
-//        System.out.println(forward.doMovement());
-//        System.out.println(left.doMovement());
-//        System.out.println(back.doMovement());
-//        System.out.println(right.doMovement());
+        MovementStrategy forward = new MoveForward();
+        MovementStrategy left = new MoveLeft();
+        MovementStrategy back = new MoveBackward();
+        MovementStrategy right = new MoveRight();
+        forward.doMovement();
+        left.doMovement();
+        back.doMovement();
+        right.doMovement();
+        System.out.println(forward.doMovement());
+        System.out.println(left.doMovement());
+        System.out.println(back.doMovement());
+        System.out.println(right.doMovement());
 // Above implements a basic level of MovementStrategy, this can be implemented at a later date with different rooms etc.
 
         Random rand = new Random();
@@ -73,9 +73,9 @@ public class TowerMain {
             System.out.println(" ######################################### ");
             ready = scanner.nextInt();
         }
-        
-        secondDoor.tellStory();        
-        
+
+        secondDoor.tellStory();
+
         PlayerSingleton player = PlayerSingleton.getInstance(chooseWeapon, name);
         player.chosenWeapon();
         System.out.println(" Player: " + player.getPlayerName() + " has: " + player.getHealth() + " health and " + player.getLives() + " lives");
@@ -100,7 +100,6 @@ public class TowerMain {
 
         int eHealth = enemys.getEnemyHP();  //gets the enemyHP 
         int eDamage = enemys.getEnemyDamage();  // gets Enemy damage
-        int randEDamage = rand.nextInt(eDamage);    //randomises damage based on enemy damage
 
         int basicAttachmentDropChance = 40; //sets int to use as random 
         int goodAttachmentDropChance = 25; //sets int to use as random 
@@ -111,9 +110,10 @@ public class TowerMain {
         while (isRunning) {
             System.out.println(" # Steps to to Grail " + randStep + " #");  //prints out step count remaining in the game
             System.out.println(" ####################### ");
-            
-            int enemyHealth = rand.nextInt(eHealth);
 
+            int enemyHealth = rand.nextInt(eHealth);
+            int randEDamage = rand.nextInt(eDamage);    //randomises damage based on enemy damage
+            
             if (enemyHealth == 0) {         //Has to be == otherwise bound.Exception 
                 enemyHealth = rand.nextInt(eHealth);    // resets enemy health based on emepy health
             }
@@ -144,7 +144,7 @@ public class TowerMain {
                             playerHP -= damageTaken;
                         }
                         enemyHealth -= damageDealt;
-                         System.out.println(String.format("\tEnemy hit you for %d damage!", damageTaken));
+                        System.out.println(String.format("\tEnemy hit you for %d damage!", damageTaken));
                         player.sufferDamage(damageTaken);
                         if (playerHP <= 0) {
                             System.out.println("\tYou Died");
@@ -178,13 +178,13 @@ public class TowerMain {
             System.out.println(" Steps to to Grail " + randStep);
             System.out.println(" Player Info: " + player.getPlayerName() + " has: " + playerHP + " health and " + player.getLives() + " lives left.");
             System.out.println(" ################################################### ");
-            
+
             if (randStep == halfStep) {
                 halfway.tellStory();
             }
-            
+
             System.out.println("--------------------------------------");
-            System.out.println("# " + enemy + " was defeated! #"); 
+            System.out.println("# " + enemy + " was defeated! #");
             System.out.println("# You have " + playerHP + " HP left. #");
             System.out.println("--------------------------------------");
 
